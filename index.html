@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta ✨</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  overflow: hidden;
+  color: white;
+}
+
+/* 🌌 estrellas */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  opacity: 0.8;
+  animation: fall 10s linear infinite;
+}
+
+@keyframes fall {
+  from { transform: translateY(0); }
+  to { transform: translateY(100vh); }
+}
+
+/* ⭐ estrella central */
+.estrella {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 60px;
+  color: #ffd54f;
+  text-shadow: 0 0 20px #ffd54f;
+}
+
+/* pantallas */
+.screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
+}
+
+/* botones */
+button {
+  background: #a64bf4;
+  border: none;
+  padding: 12px 25px;
+  margin: 10px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+/* carta */
+.carta {
+  background: rgba(0,0,0,0.7);
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* palabras clickeables */
+.clickable {
+  color: #ffd54f;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* mensaje oculto */
+.secreto {
+  margin-top: 15px;
+  font-size: 13px;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.show {
+  opacity: 1;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 música -->
+<audio id="musica" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6b8a3d8d1d.mp3?filename=romantic-piano-110624.mp3">
+</audio>
+
+<div class="stars" id="stars"></div>
+<div class="estrella">⭐</div>
+
+<!-- inicio -->
+<div class="screen" id="inicio">
+  <button onclick="start()">Abrir carta ✨</button>
+</div>
+
+<!-- confirmación -->
+<div class="screen hidden" id="confirmacion">
+  <h3>¿Segura que quieres abrirla?</h3>
+  <button onclick="carta1()">💜 opción tranquila</button>
+  <button onclick="carta2()">✨ opción curiosa</button>
+</div>
+
+<!-- carta 1 -->
+<div class="screen hidden" id="uno">
+  <div class="carta">
+    <p>
+      Holaa,<br><br>
+
+      Me gusta hablar contigo…<br>
+      se siente natural, como esas cosas<br>
+      tipo <span class="clickable" onclick="mostrar('s1')">Serendipity</span> 💜<br><br>
+
+      Y no sé… contigo todo fluye mejor.
+    </p>
+
+    <div id="s1" class="secreto">
+      tal vez no es tan casual que me gustes un poquito 👀
+    </div>
+  </div>
+</div>
+
+<!-- carta 2 -->
+<div class="screen hidden" id="dos">
+  <div class="carta">
+    <p>
+      Holaa,<br><br>
+
+      Hablar contigo siempre cambia el mood,<br>
+      tipo <span class="clickable" onclick="mostrar('s2')">Dynamite</span> ✨<br><br>
+
+      Igual y es casualidad… o no tanto.
+    </p>
+
+    <div id="s2" class="secreto">
+      chance y alguien aquí quiere invitarte a salir 👀
+    </div>
+  </div>
+</div>
+
+<script>
+// 🌌 crear estrellas
+const stars = document.getElementById("stars");
+for (let i = 0; i < 120; i++) {
+  let s = document.createElement("div");
+  s.className = "star";
+  s.style.left = Math.random()*100 + "vw";
+  s.style.top = Math.random()*100 + "vh";
+  stars.appendChild(s);
+}
+
+// funciones
+function start(){
+  document.getElementById("musica").play();
+  inicio.classList.add("hidden");
+  confirmacion.classList.remove("hidden");
+}
+
+function carta1(){
+  confirmacion.classList.add("hidden");
+  uno.classList.remove("hidden");
+}
+
+function carta2(){
+  confirmacion.classList.add("hidden");
+  dos.classList.remove("hidden");
+}
+
+function mostrar(id){
+  document.getElementById(id).classList.add("show");
+}
+</script>
+
+<!-- actualización -->
+</body>
+</html>
