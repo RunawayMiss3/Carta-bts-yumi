@@ -74,30 +74,18 @@ button {
 
 /* carta */
 .carta {
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75);
   padding: 25px;
   border-radius: 20px;
-  max-width: 400px;
+  max-width: 420px;
   text-align: center;
 }
 
-/* palabras clickeables */
+/* palabra interactiva */
 .clickable {
   color: #ffd54f;
   cursor: pointer;
   text-decoration: underline;
-}
-
-/* mensaje oculto */
-.secreto {
-  margin-top: 15px;
-  font-size: 13px;
-  opacity: 0;
-  transition: 0.5s;
-}
-
-.show {
-  opacity: 1;
 }
 </style>
 </head>
@@ -124,7 +112,7 @@ button {
   <button onclick="carta2()">✨ opción curiosa</button>
 </div>
 
-<!-- carta 1 -->
+<!-- carta 1 (ligera) -->
 <div class="screen hidden" id="uno">
   <div class="carta">
     <p>
@@ -132,14 +120,10 @@ button {
 
       Me gusta hablar contigo…<br>
       se siente natural, como esas cosas<br>
-      tipo <span class="clickable" onclick="mostrar('s1')">Serendipity</span> 💜<br><br>
+      tipo <span class="clickable" onclick="abrirSecreta()">Serendipity</span> 💜<br><br>
 
       Y no sé… contigo todo fluye mejor.
     </p>
-
-    <div id="s1" class="secreto">
-      tal vez no es tan casual que me gustes un poquito 👀
-    </div>
   </div>
 </div>
 
@@ -150,19 +134,50 @@ button {
       Holaa,<br><br>
 
       Hablar contigo siempre cambia el mood,<br>
-      tipo <span class="clickable" onclick="mostrar('s2')">Dynamite</span> ✨<br><br>
+      tipo Dynamite ✨<br><br>
 
       Igual y es casualidad… o no tanto.
     </p>
+  </div>
+</div>
 
-    <div id="s2" class="secreto">
-      chance y alguien aquí quiere invitarte a salir 👀
-    </div>
+<!-- 💌 CARTA SECRETA (larga romántica) -->
+<div class="screen hidden" id="secreta">
+  <div class="carta">
+    <p>
+      Hola,<br><br>
+
+      No sé en qué momento empezó todo esto…<br>
+      pero poco a poco te fuiste volviendo alguien importante para mí.<br><br>
+
+      Al principio era algo normal, hablar, reír, pasar el rato…  
+      pero con el tiempo empecé a notar que contigo todo se sentía diferente.<br><br>
+
+      Como si hubiera algo especial en la forma en la que haces las cosas,  
+      en cómo hablas, en cómo haces que el tiempo pase más rápido sin darme cuenta.<br><br>
+
+      No sé si tú lo sientas igual,  
+      o si solo soy yo dándole más significado del que debería…<br><br>
+
+      pero hay algo en ti que me hace querer seguir aquí,<br>
+      seguir conociéndote, seguir hablando contigo.<br><br>
+
+      Y aunque no tenga claro qué es esto exactamente,<br>
+      sí sé que es algo bonito.<br><br>
+
+      No es una confesión directa…<br>
+      pero tampoco es solo una casualidad.<br><br>
+
+      Supongo que hay cosas que simplemente pasan,<br>
+      y tú… eres una de ellas 💜
+    </p>
+
+    <button onclick="volver()">Volver ✨</button>
   </div>
 </div>
 
 <script>
-// 🌌 crear estrellas
+// estrellas
 const stars = document.getElementById("stars");
 for (let i = 0; i < 120; i++) {
   let s = document.createElement("div");
@@ -189,8 +204,14 @@ function carta2(){
   dos.classList.remove("hidden");
 }
 
-function mostrar(id){
-  document.getElementById(id).classList.add("show");
+function abrirSecreta(){
+  uno.classList.add("hidden");
+  document.getElementById("secreta").classList.remove("hidden");
+}
+
+function volver(){
+  document.getElementById("secreta").classList.add("hidden");
+  uno.classList.remove("hidden");
 }
 </script>
 
